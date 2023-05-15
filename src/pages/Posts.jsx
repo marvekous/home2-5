@@ -24,20 +24,28 @@ const Posts = () => {
     return <div>Error: {error} </div>;
   }
 
+  const textBody = (string, leto) => {
+    if (string.length > leto) {
+      const getValue = string.substring(0, leto);
+      return <>{getValue}...</>;
+    }
+    return string;
+  };
+
 
   return (
-    <div >
+    <div className={style.vv}>
       {loading || !users.length
         ? "loading..."
         : users?.map((el) => {
             return (
               <div key={el.id} className={style.content}>
+                <div className={style.bb}>
                 <h1>{el.id} <br /> {el.title}</h1>
-
+               <button className={style.btn} onClick={() => navigate(`/users/${el.id}`)}>Details</button></div>
                 <div className={style.ded}>
-                <div className={style.bb}>{el.body}</div>
+                <div> {textBody(`${el.body}`, 15)}</div>
                 <Link to={`/users/${el.id}`} className={style.num}> More...  </Link> <br />
-               <button className={style.btn} onClick={() => navigate(`/users/${el.id}`)}>Details</button>
                </div>
               </div>
         
